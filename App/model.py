@@ -1,10 +1,6 @@
 ﻿import config as cf
 import time
 from DISClib.ADT import list as lt
-from DISClib.Algorithms.Sorting import quicksort as qs
-from DISClib.Algorithms.Sorting import mergesort as ms
-from DISClib.Algorithms.Sorting import selectionsort as ss
-from DISClib.Algorithms.Sorting import insertionsort as ins
 from DISClib.Algorithms.Sorting import shellsort as shs
 
 assert cf
@@ -12,12 +8,12 @@ assert cf
 # Construccion de modelos
 
 
-def newCatalog(tad):
+def newCatalog():
     catalog = {'title': None,
                'channel_title': None}
 
-    catalog['title'] = lt.newList(tad)
-    catalog['channel_title'] = lt.newList(tad,
+    catalog['title'] = lt.newList("ARRAY_LIST")
+    catalog['channel_title'] = lt.newList("ARRAY_LIST",
                                           cmpfunction=compareChannelTitle)
 
     return catalog
@@ -46,19 +42,10 @@ def cmpVideosByViews(video1, video2):
 
 
 # Funciones de ordenamiento
-def sortVideos(catalog, size, iterable_ord):
+def sortVideos(catalog, size):
     start_time = time.process_time()
     sub_list = lt.subList(catalog['title'], 0, size)
-    if iterable_ord == "quicksort":
-        new_title = qs.sort(sub_list, cmpVideosByViews)
-    elif iterable_ord == "mergesort":
-        new_title = ms.sort(sub_list, cmpVideosByViews)
-    elif iterable_ord == "selectionsort":
-        new_title = ss.sort(sub_list, cmpVideosByViews)
-    elif iterable_ord == "insertionsort":
-        new_title = ins.sort(sub_list, cmpVideosByViews)
-    elif iterable_ord == "shellsort":
-        new_title = shs.sort(sub_list, cmpVideosByViews)
+    new_title = shs.sort(sub_list, cmpVideosByViews)
     stop_time = time.process_time()
     elapsed_time_mseg = (stop_time - start_time)*1000
     return elapsed_time_mseg, new_title

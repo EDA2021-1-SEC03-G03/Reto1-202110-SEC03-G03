@@ -32,6 +32,6 @@ def loadVideos(catalog):
 
 
 def sortVideos(catalog, size, iterable_ord):
-    return model.sortVideos(catalog, size, iterable_ord)
+    return model.sortVideos(catalog, size)
 
 # Funciones de consulta sobre el catálogo
