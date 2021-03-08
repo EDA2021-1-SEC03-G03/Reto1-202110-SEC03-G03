@@ -53,10 +53,10 @@ while True:
         print('Videos cargados: ' + str(lt.size(catalog['title'])))
 
     elif int(inputs) == 2:
-        size = int(input("Indique el tamaño de la muestra: "))
         category_name = input("Indique el nombre de la categoria: ")
         country = input("Indique el país a consultar: ")
-        result = controller.sortVideos(catalog, size)
+        size = int(input("Indique el tamaño de la lista de videos: "))
+        result = controller.sortVideos(catalog, category_name, country, size)
         printResults(result[1], size)
         print("Para la muestra de", size, " elementos, el tiempo (mseg) es: ",
               str(result[0]))

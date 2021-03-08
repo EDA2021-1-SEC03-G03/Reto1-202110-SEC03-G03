@@ -42,7 +42,7 @@ def cmpVideosByViews(video1, video2):
 
 
 # Funciones de ordenamiento
-def sortVideos(catalog, size):
+def sortVideos(catalog, category_name, country, size):
     start_time = time.process_time()
     sub_list = lt.subList(catalog['title'], 0, size)
     new_title = shs.sort(sub_list, cmpVideosByViews)
