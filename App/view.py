@@ -8,15 +8,15 @@ assert cf
 def printMenu():
     print("Bienvenido")
     print("1- Cargar información en el catálogo")
-    print("2- Conocer los videos tendencia en un país y caterogía específica")
+    print("2- Conocer los videos con más views que son tendencia en un país")
     print("0- Salir")
 
 
-def initCatalog(tad):
+def initCatalog():
     """
     Inicializa el catalogo de libros
     """
-    return controller.initCatalog(tad)
+    return controller.initCatalog()
 
 
 def loadData(catalog):
@@ -47,11 +47,15 @@ while True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs) == 1:
+        catalog = initCatalog()
+        loadData(catalog)
         print("Cargando información de los archivos ....")
         print('Videos cargados: ' + str(lt.size(catalog['title'])))
 
     elif int(inputs) == 2:
         size = int(input("Indique el tamaño de la muestra: "))
+        category_name = input("Indique el nombre de la categoria: ")
+        country = input("Indique el país a consultar: ")
         result = controller.sortVideos(catalog, size)
         printResults(result[1], size)
         print("Para la muestra de", size, " elementos, el tiempo (mseg) es: ",

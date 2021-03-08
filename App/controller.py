@@ -5,11 +5,11 @@ import csv
 # Inicialización del Catálogo de libros
 
 
-def initCatalog(tad):
+def initCatalog():
     """
     Llama la funcion de inicializacion del catalogo del modelo.
     """
-    catalog = model.newCatalog(tad)
+    catalog = model.newCatalog()
     return catalog
 
 # Funciones para la carga de datos
@@ -23,7 +23,7 @@ def loadData(catalog):
 
 
 def loadVideos(catalog):
-    videosfile = cf.data_dir + 'videos-large.csv'
+    videosfile = cf.data_dir + 'videos-small.csv'
     input_file = csv.DictReader(open(videosfile, encoding='utf-8'))
     for video in input_file:
         model.addVideo(catalog, video)
