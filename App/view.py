@@ -26,19 +26,31 @@ def loadData(catalog):
     controller.loadData(catalog)
 
 
-def printResults(ord_videos, size):
+def printResults(ord_videos):
+    print("La información del primer video cargado es: ")
+    video = lt.getElement(ord_videos, 1)
+    print('\tTitle: [' + video['title'] +
+          ']\n\tChannel title: [' + video['channel_title'] +
+          ']\n\tTrending date: [' + video['trending_date'] +
+          ']\n\tCountry: [' + video['country'] +
+          ']\n\tViews: [' + video['views'] +
+          ']\n\tLikes: [' + video['likes'] +
+          ']\n\tDislikes: [' + video['dislikes'])
+
+
+def printResultsReq1(ord_videos, size):
     tam = lt.size(ord_videos)
     if tam == size:
         print("Los primeros ", str(size), " libros ordenados son: ")
         i = 1
         while i <= size:
             video = lt.getElement(ord_videos, i)
-            print('Trending date: ' + video['trending_date'] +
-                  'Title: ' + video['title'] +
-                  'Chanel title: ' + video['channel_title'] +
-                  'Publish time: ' + video['publish_time'] +
-                  'Views: ' + video['views'] +
-                  'Dislikes: ' + video['dislikes'])
+            print('\t[Trending date: ' + video['trending_date'] +
+                  ']\t[Title: ' + video['title'] +
+                  ']\t[Channel title: ' + video['channel_title'] +
+                  ']\t[Publish time: ' + video['publish_time'] +
+                  ']\t[Views: ' + video['views'] +
+                  ']\t[Dislikes: ' + video['dislikes'])
             i += 1
 
 
@@ -56,13 +68,14 @@ while True:
         loadData(catalog)
         print("Cargando información de los archivos ....")
         print('Videos cargados: ' + str(lt.size(catalog['title'])))
+        printResults(catalog['title'])
 
     elif int(inputs) == 2:
         category_name = input("Indique el nombre de la categoria: ")
         country = input("Indique el país a consultar: ")
         size = int(input("Indique el tamaño de la lista de videos: "))
         result = controller.sortVideos(catalog, category_name, country, size)
-        printResults(result, size)
+        printResultsReq1(result, size)
 
     else:
         sys.exit(0)
