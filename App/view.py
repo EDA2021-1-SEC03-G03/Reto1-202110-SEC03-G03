@@ -24,7 +24,7 @@ def loadData(catalog):
     Carga los libros en la estructura de datos
     """
     controller.loadData(catalog)
-
+ 
 
 def printResults(ord_videos):
     print("La información del primer video cargado es: ")
