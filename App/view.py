@@ -50,6 +50,7 @@ def printResultsReq1(ord_videos, size):
                   ']\t[Channel title: ' + video['channel_title'] +
                   ']\t[Publish time: ' + video['publish_time'] +
                   ']\t[Views: ' + video['views'] +
+                  ']\n\tLikes: [' + video['likes'] +
                   ']\t[Dislikes: ' + video['dislikes'])
             i += 1
 
