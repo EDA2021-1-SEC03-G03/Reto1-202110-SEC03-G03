@@ -20,6 +20,7 @@ def loadData(catalog):
     Carga los archivos y los datos en la estructura de datos
     """
     loadVideos(catalog)
+    loadCategory(catalog)
 
 
 def loadVideos(catalog):
@@ -28,6 +29,12 @@ def loadVideos(catalog):
     for video in input_file:
         model.addVideo(catalog, video)
 
+
+def loadCategory(catalog):
+    categoriesfile = cf.data_dir + 'category-id.csv'
+    input_file = csv.DictReader(open(categoriesfile, encoding='utf-8'), delimiter='\t')
+    for category in input_file:
+        model.addCategory(catalog, category)
 # Funciones de ordenamiento
 
 

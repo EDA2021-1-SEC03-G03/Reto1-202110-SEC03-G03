@@ -52,7 +52,10 @@ def newCatalog():
 
 def addVideo(catalog, title):
     lt.addLast(catalog['title'], title)
+    
 
+def addCategory(catalog, category):
+    lt.addLast(catalog['category_id'], category)
 # Funciones para creacion de datos
 
 # Funciones de consulta

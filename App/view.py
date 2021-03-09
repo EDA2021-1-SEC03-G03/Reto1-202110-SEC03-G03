@@ -70,6 +70,10 @@ while True:
         print("Cargando información de los archivos ....")
         print('Videos cargados: ' + str(lt.size(catalog['title'])))
         printResults(catalog['title'])
+        print('La informacion de las categorias es: ')
+        for index in catalog['category_id']['elements']:
+            print('\tID: [' + str(index['id']) +
+                  ']\tCategoria: [' + index['name'] + ']')
 
     elif int(inputs) == 2:
         category_name = input("Indique el nombre de la categoria: ")
