@@ -9,12 +9,17 @@ assert cf
 
 
 def newCatalog():
-    catalog = {'title': None,
-               'channel_title': None}
+    catalog = {'trending_date': None,
+               'title': None,
+               'channel_title': None,
+               'publish_time': None,
+               'views': None,
+               'likes': None,
+               'dislikes': None}
 
     catalog['title'] = lt.newList("ARRAY_LIST")
-    catalog['channel_title'] = lt.newList("ARRAY_LIST",
-                                          cmpfunction=compareChannelTitle)
+    catalog['views'] = lt.newList("ARRAY_LIST",
+                                  cmpfunction=cmpVideosByViews)
 
     return catalog
 
@@ -31,21 +36,14 @@ def addVideo(catalog, title):
 # Funciones utilizadas para comparar elementos dentro de una lista
 
 
-def compareChannelTitle(authorname1, author):
-    if (authorname1.lower() in author['name'].lower()):
-        return 0
-    return -1
-
-
 def cmpVideosByViews(video1, video2):
     return (float(video1['views']) > float(video2['views']))
 
 
 # Funciones de ordenamiento
 def sortVideos(catalog, category_name, country, size):
-    start_time = time.process_time()
+
     sub_list = lt.subList(catalog['title'], 0, size)
     new_title = shs.sort(sub_list, cmpVideosByViews)
-    stop_time = time.process_time()
-    elapsed_time_mseg = (stop_time - start_time)*1000
-    return elapsed_time_mseg, new_title
+
+    return new_title

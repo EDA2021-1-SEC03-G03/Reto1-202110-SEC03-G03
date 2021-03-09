@@ -26,14 +26,19 @@ def loadData(catalog):
     controller.loadData(catalog)
 
 
-def printResults(ord_books, sample):
-    size = lt.size(ord_books)
-    if size == sample:
-        print("Los primeros ", str(sample), " libros ordenados son: ")
+def printResults(ord_videos, size):
+    tam = lt.size(ord_videos)
+    if tam == size:
+        print("Los primeros ", str(size), " libros ordenados son: ")
         i = 1
-        while i <= sample:
-            book = lt.getElement(ord_books, i)
-            print('Titulo: ' + book['title'] + ' views: ' + book['views'])
+        while i <= size:
+            video = lt.getElement(ord_videos, i)
+            print('Trending date: ' + video['trending_date'] +
+                  'Title: ' + video['title'] +
+                  'Chanel title: ' + video['channel_title'] +
+                  'Publish time: ' + video['publish_time'] +
+                  'Views: ' + video['views'] +
+                  'Dislikes: ' + video['dislikes'])
             i += 1
 
 
@@ -57,9 +62,7 @@ while True:
         country = input("Indique el país a consultar: ")
         size = int(input("Indique el tamaño de la lista de videos: "))
         result = controller.sortVideos(catalog, category_name, country, size)
-        printResults(result[1], size)
-        print("Para la muestra de", size, " elementos, el tiempo (mseg) es: ",
-              str(result[0]))
+        printResults(result, size)
 
     else:
         sys.exit(0)
