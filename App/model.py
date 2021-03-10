@@ -102,8 +102,13 @@ def addCategoryInfo(catalog, category):
 def traduceCategoryToId(categoryList, category_name):
     iterator = 0
     while iterator < (lt.size(categoryList)):
-        if str(categoryList[iterator['category']]) == category_name:
-            return categoryList[iterator['id']]
+
+        category = categoryList['elements'][iterator]['category']
+
+        if category == category_name:
+            print('hola')
+            return categoryList['elements'][iterator]['id']
+        iterator += 1
 
 # Funciones para creacion de datos
 
