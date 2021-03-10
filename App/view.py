@@ -103,7 +103,7 @@ while True:
         category_name = input("Indique el nombre de la categoria: ")
         country = input("Indique el país a consultar: ")
         size = int(input("Indique el tamaño de la lista de videos: "))
-        result = controller.sortVideos(catalogList, category_name,
+        result = controller.sortVideos(categories, catalogList, category_name,
                                        country, size)
         printResultsReq1(result, size)
 

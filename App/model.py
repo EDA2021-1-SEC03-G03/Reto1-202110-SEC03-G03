@@ -86,7 +86,16 @@ def addVideo(catalogList, cg):
 
 
 def addCategory(catalog, category):
-    lt.addLast(catalog['id'], category)
+    lt.addLast(catalog["id"], category)
+
+
+def traduceCategoryToId(category_cat, cataloglist, category):
+    print(category_cat)
+    category_pos = lt.isPresent(category_cat['category'], category)
+    print(category_pos)
+    category_id = lt.getElement(category_cat['id'], category_pos)
+    return category_id['id']
+
 # Funciones para creacion de datos
 
 # Funciones de consulta
@@ -99,7 +108,7 @@ def cmpVideosByViews(video1, video2):
 
 
 # Funciones de ordenamiento
-def sortVideos(catalogList, category_name, country, size):
+def sortVideos(categories_cat, catalogList, category_name, country, size):
     '''
     if catalog['country'] == country:
         # obtener la pos
@@ -107,7 +116,7 @@ def sortVideos(catalogList, category_name, country, size):
 
     sub_list = lt.subList(catalog['title'], 0, size)
     '''
-
+    print(traduceCategoryToId(categories_cat, catalogList, category_name))
     new_title = shs.sort(catalogList, cmpVideosByViews)
 
     return new_title

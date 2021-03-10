@@ -57,7 +57,7 @@ def loadCategory(catalog):
 # Funciones de ordenamiento
 
 
-def sortVideos(catalogList, category_name, country, size):
-    return model.sortVideos(catalogList, category_name, country, size)
+def sortVideos(categories_cat, catalogList, category_name, country, size):
+    return model.sortVideos(categories_cat, catalogList, category_name, country, size)
 
 # Funciones de consulta sobre el catálogo
