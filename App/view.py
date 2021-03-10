@@ -109,7 +109,6 @@ while True:
         size = int(input("Indique el tamaño de la lista de videos: "))
         result = controller.sortVideos(categoryList, catalogList,
                                        category_name, country, size)
-        print(result['elements'])
         printResultsReq1(result['elements'], size)
 
     else:
