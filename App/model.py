@@ -2,6 +2,7 @@
 # import time
 from DISClib.ADT import list as lt
 from DISClib.Algorithms.Sorting import shellsort as shs
+from DISClib.DataStructures import arraylistiterator as it
 
 assert cf
 
@@ -39,18 +40,6 @@ def newCatalog():
                'dislikes': 0,
                'country': None}
 
-    catalog['trending_date'] = lt.newList("ARRAY_LIST")
-    catalog['title'] = lt.newList("ARRAY_LIST")
-    catalog['channel_title'] = lt.newList("ARRAY_LIST")
-    catalog['category_id'] = lt.newList("ARRAY_LIST")
-    catalog['publish_time'] = lt.newList("ARRAY_LIST")
-    catalog['tags'] = lt.newList("ARRAY_LIST")
-    catalog['views'] = lt.newList("ARRAY_LIST",
-                                  cmpfunction=cmpVideosByViews)
-    catalog['likes'] = lt.newList("ARRAY_LIST")
-    catalog['dislikes'] = lt.newList("ARRAY_LIST")
-    catalog['country'] = lt.newList("ARRAY_LIST")
-
     return catalog
 
 
@@ -64,20 +53,36 @@ def newCategory():
     return category
 
 
+def newCatalogList():
+
+    catalogList = lt.newList("ARRAY_LIST")
+
+    return catalogList
+
+
 # Funciones para agregar informacion al catalogo
 
 
 def addVideoInfo(catalog, video):
-    lt.addLast(catalog['trending_date'], video['trending_date'])
-    lt.addLast(catalog['title'], video['title'])
-    lt.addLast(catalog['channel_title'], video['channel_title'])
-    lt.addLast(catalog['category_id'], video['category_id'])
-    lt.addLast(catalog['publish_time'], video['publish_time'])
-    lt.addLast(catalog['tags'], video['tags'])
-    lt.addLast(catalog['views'], float(video['views']))
-    lt.addLast(catalog['likes'], int(video['likes']))
-    lt.addLast(catalog['dislikes'], int(video['dislikes']))
-    lt.addLast(catalog['country'], video['country'])
+
+    cg = catalog.copy()
+
+    cg['trending_date'] = video['trending_date']
+    cg['title'] = video['title']
+    cg['channel_title'] = video['channel_title']
+    cg['category_id'] = video['category_id']
+    cg['publish_time'] = video['publish_time']
+    cg['tags'] = video['tags']
+    cg['views'] = float(video['views'])
+    cg['likes'] = int(video['likes'])
+    cg['dislikes'] = int(video['dislikes'])
+    cg['country'] = video['country']
+
+    return cg
+
+
+def addVideo(catalogList, cg):
+    lt.addLast(catalogList, cg)
 
 
 def addCategory(catalog, category):
@@ -90,11 +95,11 @@ def addCategory(catalog, category):
 
 
 def cmpVideosByViews(video1, video2):
-    return (float(video1) > float(video2))
+    return (float(video1['views']) > float(video2['views']))
 
 
 # Funciones de ordenamiento
-def sortVideos(catalog, category_name, country, size):   
+def sortVideos(catalogList, category_name, country, size):
     '''
     if catalog['country'] == country:
         # obtener la pos
@@ -102,8 +107,7 @@ def sortVideos(catalog, category_name, country, size):
 
     sub_list = lt.subList(catalog['title'], 0, size)
     '''
-    # if catalog[''] == category_name:
 
-    new_title = shs.sort(catalog['views'], cmpVideosByViews)
+    new_title = shs.sort(catalogList, cmpVideosByViews)
 
     return new_title

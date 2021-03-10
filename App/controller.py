@@ -27,7 +27,8 @@ def loadDataVideos(catalog):
     """
     Carga los archivos y los datos en la estructura de datos
     """
-    loadVideos(catalog)
+    catalogList = loadVideos(catalog)
+    return catalogList
 
 
 def loadDataCategories(categories):
@@ -40,8 +41,12 @@ def loadDataCategories(categories):
 def loadVideos(catalog):
     videosfile = cf.data_dir + 'videos-small.csv'
     input_file = csv.DictReader(open(videosfile, encoding='utf-8'))
+    catalogList = model.newCatalogList()
     for video in input_file:
-        model.addVideoInfo(catalog, video)
+        cg = model.addVideoInfo(catalog, video)
+        model.addVideo(catalogList, cg)
+
+    return catalogList
 
 
 def loadCategory(catalog):
@@ -52,7 +57,7 @@ def loadCategory(catalog):
 # Funciones de ordenamiento
 
 
-def sortVideos(catalog, category_name, country, size):
-    return model.sortVideos(catalog, category_name, country, size)
+def sortVideos(catalogList, category_name, country, size):
+    return model.sortVideos(catalogList, category_name, country, size)
 
 # Funciones de consulta sobre el catálogo

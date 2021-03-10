@@ -30,7 +30,9 @@ def loadDataVideos(catalog):
     """
     Carga los libros en la estructura de datos
     """
-    controller.loadDataVideos(catalog)
+    catalogList = controller.loadDataVideos(catalog)
+
+    return catalogList
 
 
 def loadDataCategories(catalog):
@@ -40,15 +42,17 @@ def loadDataCategories(catalog):
     controller.loadDataCategories(catalog)
 
 
-def printVideos(video):
+def printVideos(videos):
     print("La información del primer video cargado es: ")
-    print('\tTitle: [', lt.getElement(video['title'], 1),
-          ']\n\tChannel title: [', lt.getElement(video['channel_title'], 1),
-          ']\n\tTrending date: [', lt.getElement(video['trending_date'], 1),
-          ']\n\tCountry: [', lt.getElement(video['country'], 1),
-          ']\n\tViews: [', lt.getElement(video['views'], 1),
-          ']\n\tLikes: [', lt.getElement(video['likes'], 1),
-          ']\n\tDislikes: [', lt.getElement(video['dislikes'], 1), ']')
+    video = lt.getElement(videos, 1)
+    print('\t[Trending date: ', video['trending_date'],
+          ']\t[Title: ', video['title'],
+          ']\t[Channel title: ', video['channel_title'],
+          ']\t[Publish time: ', video['publish_time'],
+          ']\t[Views: ', video['views'],
+          ']\n\tLikes: [', video['likes'],
+          ']\t[Dislikes: ', video['dislikes'],
+          ']')
 
 
 def printCategories(categories):
@@ -59,21 +63,20 @@ def printCategories(categories):
 
 
 def printResultsReq1(ord_videos, size):
-    tam = lt.size(ord_videos)
-    if tam == size:
-        print("Los primeros ", str(size), " libros ordenados son: ")
-        i = 1
-        while i <= size:
-            video = lt.getElement(ord_videos, i)
-            print('\t[Trending date: ' + video['trending_date'] +
-                  ']\t[Title: ' + video['title'] +
-                  ']\t[Channel title: ' + video['channel_title'] +
-                  ']\t[Publish time: ' + video['publish_time'] +
-                  ']\t[Views: ' + video['views'] +
-                  ']\n\tLikes: [' + video['likes'] +
-                  ']\t[Dislikes: ' + video['dislikes'] +
-                  ']')
-            i += 1
+
+    print("Los primeros ", str(size), " videos ordenados son: ")
+    i = 1
+    while i <= size:
+        video = lt.getElement(ord_videos, i)
+        print('\t[Trending date: ', video['trending_date'],
+              ']\t[Title: ', video['title'],
+              ']\t[Channel title: ', video['channel_title'],
+              ']\t[Publish time: ', video['publish_time'],
+              ']\t[Views: ', video['views'],
+              ']\n\tLikes: [', video['likes'],
+              ']\t[Dislikes: ', video['dislikes'],
+              ']')
+        i += 1
 
 
 catalog = None
@@ -87,11 +90,10 @@ while True:
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs) == 1:
         print("Cargando información de los archivos ....")
-
         videos = initCatalogVideos()
-        loadDataVideos(videos)
-        print('Videos cargados: ' + str(lt.size(videos['title'])))
-        printVideos(videos)
+        catalogList = loadDataVideos(videos)
+        print('Videos cargados: ' + str(lt.size(catalogList)))
+        printVideos(catalogList)
 
         categories = initCatalogCategories()
         loadDataCategories(categories)
@@ -101,7 +103,8 @@ while True:
         category_name = input("Indique el nombre de la categoria: ")
         country = input("Indique el país a consultar: ")
         size = int(input("Indique el tamaño de la lista de videos: "))
-        result = controller.sortVideos(videos, category_name, country, size)
+        result = controller.sortVideos(catalogList, category_name,
+                                       country, size)
         printResultsReq1(result, size)
 
     else:
