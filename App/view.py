@@ -85,6 +85,17 @@ def printResultsReq1(video, size):
         i += 1
 
 
+def printResultsReq2(video, country):
+
+    print("El video más trending para", country, "fue: ")
+
+    print('\tTitle: [', video[0]['title'],
+          ']\n\tChannel title: [', video[0]['channel_title'],
+          ']\n\tCountry: [', video[0]['country'],
+          ']\n\tNumber of days: [', video[0]['days'],
+          ']')
+
+
 catalog = None
 
 
@@ -117,6 +128,9 @@ while True:
         country = input("Indique el nombre del país: ")
 
         controller.loadDays(catalogList)
+        result = controller.sortVideosCountry(catalogList, country)
+
+        printResultsReq2(result['elements'], country)
 
     elif int(inputs) == 4:
         category_name = input("Indique el nombre de la categoria: ")
