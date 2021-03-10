@@ -40,20 +40,19 @@ def loadDataCategories(catalog):
     controller.loadDataCategories(catalog)
 
 
-def printVideos(ord_videos):
+def printVideos(video):
     print("La información del primer video cargado es: ")
-    video = lt.getElement(ord_videos, 1)
-    print('\tTitle: [' + video['title'] +
-          ']\n\tChannel title: [' + video['channel_title'] +
-          ']\n\tTrending date: [' + video['trending_date'] +
-          ']\n\tCountry: [' + video['country'] +
-          ']\n\tViews: [' + video['views'] +
-          ']\n\tLikes: [' + video['likes'] +
-          ']\n\tDislikes: [' + video['dislikes'])
+    print('\tTitle: [', lt.getElement(video['title'], 1),
+          ']\n\tChannel title: [', lt.getElement(video['channel_title'], 1),
+          ']\n\tTrending date: [', lt.getElement(video['trending_date'], 1),
+          ']\n\tCountry: [', lt.getElement(video['country'], 1),
+          ']\n\tViews: [', lt.getElement(video['views'], 1),
+          ']\n\tLikes: [', lt.getElement(video['likes'], 1),
+          ']\n\tDislikes: [', lt.getElement(video['dislikes'], 1), ']')
 
 
 def printCategories(categories):
-    print('La informacion de las categorias es: ')
+    print('\nLa informacion de las categorias es: ')
     for index in categories['id']['elements']:
         print('\tID: [' + str(index['id']) +
               ']\tCategoria: [' + index['name'] + ']')
@@ -92,7 +91,7 @@ while True:
         videos = initCatalogVideos()
         loadDataVideos(videos)
         print('Videos cargados: ' + str(lt.size(videos['title'])))
-        printVideos(videos['title'])
+        printVideos(videos)
 
         categories = initCatalogCategories()
         loadDataCategories(categories)

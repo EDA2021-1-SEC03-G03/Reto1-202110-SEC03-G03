@@ -35,15 +35,21 @@ def newCatalog():
                'publish_time': None,
                'tags': None,
                'views': None,
-               'likes': None,
-               'dislikes': None,
+               'likes': 0,
+               'dislikes': 0,
                'country': None}
 
+    catalog['trending_date'] = lt.newList("ARRAY_LIST")
     catalog['title'] = lt.newList("ARRAY_LIST")
+    catalog['channel_title'] = lt.newList("ARRAY_LIST")
+    catalog['category_id'] = lt.newList("ARRAY_LIST")
+    catalog['publish_time'] = lt.newList("ARRAY_LIST")
+    catalog['tags'] = lt.newList("ARRAY_LIST")
     catalog['views'] = lt.newList("ARRAY_LIST",
                                   cmpfunction=cmpVideosByViews)
+    catalog['likes'] = lt.newList("ARRAY_LIST")
+    catalog['dislikes'] = lt.newList("ARRAY_LIST")
     catalog['country'] = lt.newList("ARRAY_LIST")
-    catalog['category_id'] = lt.newList("ARRAY_LIST")
 
     return catalog
 
@@ -61,8 +67,17 @@ def newCategory():
 # Funciones para agregar informacion al catalogo
 
 
-def addVideo(catalog, title):
-    lt.addLast(catalog['title'], title)
+def addVideoInfo(catalog, video):
+    lt.addLast(catalog['trending_date'], video['trending_date'])
+    lt.addLast(catalog['title'], video['title'])
+    lt.addLast(catalog['channel_title'], video['channel_title'])
+    lt.addLast(catalog['category_id'], video['category_id'])
+    lt.addLast(catalog['publish_time'], video['publish_time'])
+    lt.addLast(catalog['tags'], video['tags'])
+    lt.addLast(catalog['views'], float(video['views']))
+    lt.addLast(catalog['likes'], int(video['likes']))
+    lt.addLast(catalog['dislikes'], int(video['dislikes']))
+    lt.addLast(catalog['country'], video['country'])
 
 
 def addCategory(catalog, category):
@@ -75,16 +90,20 @@ def addCategory(catalog, category):
 
 
 def cmpVideosByViews(video1, video2):
-    return (float(video1['views']) > float(video2['views']))
+    return (float(video1) > float(video2))
 
 
 # Funciones de ordenamiento
-def sortVideos(catalog, category_name, country, size):
+def sortVideos(catalog, category_name, country, size):   
+    '''
+    if catalog['country'] == country:
+        # obtener la pos
+        lt.deleteElement(catalog['title'], pos)
 
     sub_list = lt.subList(catalog['title'], 0, size)
-
+    '''
     # if catalog[''] == category_name:
 
-    new_title = shs.sort(sub_list, cmpVideosByViews)
+    new_title = shs.sort(catalog['views'], cmpVideosByViews)
 
     return new_title
