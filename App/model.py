@@ -145,6 +145,10 @@ def cmpVideosByViews(video1, video2):
     return (float(video1['views']) > float(video2['views']))
 
 
+def cmpVideosByDays(video1, video2):
+    return (float(video1['days']) > float(video2['days']))
+
+
 # Funciones de ordenamiento
 def sortVideos(categoryList, catalogList, category_name, country, size):
 
