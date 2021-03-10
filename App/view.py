@@ -89,10 +89,10 @@ def printResultsReq2(video, country):
 
     print("El video más trending para", country, "fue: ")
 
-    print('\t[Title: ', video[0]['title'],
-          ']\t[Channel title: ', video[0]['channel_title'],
-          ']\t[country: ', video[0]['country'],
-          ']\t[Number of days: ', video[0]['days'],
+    print('\tTitle: [', video[0]['title'],
+          ']\n\tChannel title: [', video[0]['channel_title'],
+          ']\n\tCountry: [', video[0]['country'],
+          ']\n\tNumber of days: [', video[0]['days'],
           ']')
 
 
