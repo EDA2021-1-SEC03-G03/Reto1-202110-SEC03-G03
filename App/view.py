@@ -2,6 +2,7 @@
 import sys
 import controller
 from DISClib.ADT import list as lt
+from DISClib.DataStructures import arraylistiterator as it
 assert cf
 
 
@@ -39,7 +40,9 @@ def loadDataCategories(catalog):
     """
     Carga los libros en la estructura de datos
     """
-    controller.loadDataCategories(catalog)
+    categoryList = controller.loadDataCategories(catalog)
+
+    return categoryList
 
 
 def printVideos(videos):
@@ -57,9 +60,11 @@ def printVideos(videos):
 
 def printCategories(categories):
     print('\nLa informacion de las categorias es: ')
-    for index in categories['id']['elements']:
-        print('\tID: [' + str(index['id']) +
-              ']\tCategoria: [' + index['name'] + ']')
+    iterator = it.newIterator(categories)
+    while it.hasNext(iterator):
+        pos = it.next(iterator)
+        print('\tID: [', pos['id'],
+              ']\tCategoria: [', pos['category'], ']')
 
 
 def printResultsReq1(ord_videos, size):
@@ -96,14 +101,14 @@ while True:
         printVideos(catalogList)
 
         categories = initCatalogCategories()
-        loadDataCategories(categories)
-        printCategories(categories)
+        categoryList = loadDataCategories(categories)
+        printCategories(categoryList)
 
     elif int(inputs) == 2:
         category_name = input("Indique el nombre de la categoria: ")
         country = input("Indique el país a consultar: ")
         size = int(input("Indique el tamaño de la lista de videos: "))
-        result = controller.sortVideos(categories, catalogList, category_name,
+        result = controller.sortVideos(categoryList, catalogList, category_name,
                                        country, size)
         printResultsReq1(result, size)
 

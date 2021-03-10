@@ -35,7 +35,8 @@ def loadDataCategories(categories):
     """
     Carga los archivos y los datos en la estructura de datos
     """
-    loadCategory(categories)
+    categoryList = loadCategory(categories)
+    return categoryList
 
 
 def loadVideos(catalog):
@@ -52,12 +53,16 @@ def loadVideos(catalog):
 def loadCategory(catalog):
     categoriesfile = cf.data_dir + 'category-id.csv'
     input_file = csv.DictReader(open(categoriesfile, encoding='utf-8'), delimiter='\t')
+    categoryList = model.newCategoryList()
     for category in input_file:
-        model.addCategory(catalog, category)
+        cl = model.addCategoryInfo(catalog, category)
+        model.addCategory(categoryList, cl)
+
+    return categoryList
 # Funciones de ordenamiento
 
 
-def sortVideos(categories_cat, catalogList, category_name, country, size):
-    return model.sortVideos(categories_cat, catalogList, category_name, country, size)
+def sortVideos(categoryList, catalogList, category_name, country, size):
+    return model.sortVideos(categoryList, catalogList, category_name, country, size)
 
 # Funciones de consulta sobre el catálogo

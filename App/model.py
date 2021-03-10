@@ -3,7 +3,6 @@
 from DISClib.ADT import list as lt
 from DISClib.Algorithms.Sorting import shellsort as shs
 from DISClib.DataStructures import arraylistiterator as it
-
 assert cf
 
 # Construccion de modelos
@@ -47,10 +46,12 @@ def newCategory():
     category = {'id': None,
                 'category': None}
 
-    category['id'] = lt.newList("ARRAY_LIST")
-    category['category'] = lt.newList("ARRAY_LIST")
-
     return category
+
+
+def newCategoryList():
+    categoryList = lt.newList("ARRAY_LIST")
+    return categoryList
 
 
 def newCatalogList():
@@ -85,16 +86,24 @@ def addVideo(catalogList, cg):
     lt.addLast(catalogList, cg)
 
 
-def addCategory(catalog, category):
-    lt.addLast(catalog["id"], category)
+def addCategory(catalog, cl):
+    lt.addLast(catalog, cl)
 
 
-def traduceCategoryToId(category_cat, cataloglist, category):
-    print(category_cat)
-    category_pos = lt.isPresent(category_cat['category'], category)
-    print(category_pos)
-    category_id = lt.getElement(category_cat['id'], category_pos)
-    return category_id['id']
+def addCategoryInfo(catalog, category):
+    cl = catalog.copy()
+
+    cl['id'] = category['id']
+    cl['category'] = category['name']
+
+    return cl
+
+
+def traduceCategoryToId(categoryList, category_name):
+    iterator = 0
+    while iterator < (lt.size(categoryList)):
+        if str(categoryList[iterator['category']]) == category_name:
+            return categoryList[iterator['id']]
 
 # Funciones para creacion de datos
 
@@ -108,7 +117,7 @@ def cmpVideosByViews(video1, video2):
 
 
 # Funciones de ordenamiento
-def sortVideos(categories_cat, catalogList, category_name, country, size):
+def sortVideos(categoryList, catalogList, category_name, country, size):
     '''
     if catalog['country'] == country:
         # obtener la pos
@@ -116,7 +125,7 @@ def sortVideos(categories_cat, catalogList, category_name, country, size):
 
     sub_list = lt.subList(catalog['title'], 0, size)
     '''
-    print(traduceCategoryToId(categories_cat, catalogList, category_name))
+    print(traduceCategoryToId(categoryList, category_name))
     new_title = shs.sort(catalogList, cmpVideosByViews)
 
     return new_title
