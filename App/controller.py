@@ -2,25 +2,39 @@
 import model
 import csv
 
-# Inicialización del Catálogo de libros
+# Inicialización de los Catálogos
 
 
-def initCatalog():
+def initCatalogVideos():
     """
     Llama la funcion de inicializacion del catalogo del modelo.
     """
     catalog = model.newCatalog()
     return catalog
 
+
+def initCatalogCategories():
+    """
+    Llama la funcion de inicializacion del catalogo del modelo.
+    """
+    category = model.newCategory()
+    return category
+
 # Funciones para la carga de datos
 
 
-def loadData(catalog):
+def loadDataVideos(catalog):
     """
     Carga los archivos y los datos en la estructura de datos
     """
     loadVideos(catalog)
-    loadCategory(catalog)
+
+
+def loadDataCategories(categories):
+    """
+    Carga los archivos y los datos en la estructura de datos
+    """
+    loadCategory(categories)
 
 
 def loadVideos(catalog):

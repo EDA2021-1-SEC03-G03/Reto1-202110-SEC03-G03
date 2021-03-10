@@ -12,21 +12,35 @@ def printMenu():
     print("0- Salir")
 
 
-def initCatalog():
+def initCatalogVideos():
     """
     Inicializa el catalogo de libros
     """
-    return controller.initCatalog()
+    return controller.initCatalogVideos()
 
 
-def loadData(catalog):
+def initCatalogCategories():
+    """
+    Inicializa el catalogo de libros
+    """
+    return controller.initCatalogCategories()
+
+
+def loadDataVideos(catalog):
     """
     Carga los libros en la estructura de datos
     """
-    controller.loadData(catalog)
- 
+    controller.loadDataVideos(catalog)
 
-def printResults(ord_videos):
+
+def loadDataCategories(catalog):
+    """
+    Carga los libros en la estructura de datos
+    """
+    controller.loadDataCategories(catalog)
+
+
+def printVideos(ord_videos):
     print("La información del primer video cargado es: ")
     video = lt.getElement(ord_videos, 1)
     print('\tTitle: [' + video['title'] +
@@ -36,6 +50,13 @@ def printResults(ord_videos):
           ']\n\tViews: [' + video['views'] +
           ']\n\tLikes: [' + video['likes'] +
           ']\n\tDislikes: [' + video['dislikes'])
+
+
+def printCategories(categories):
+    print('La informacion de las categorias es: ')
+    for index in categories['id']['elements']:
+        print('\tID: [' + str(index['id']) +
+              ']\tCategoria: [' + index['name'] + ']')
 
 
 def printResultsReq1(ord_videos, size):
@@ -51,7 +72,8 @@ def printResultsReq1(ord_videos, size):
                   ']\t[Publish time: ' + video['publish_time'] +
                   ']\t[Views: ' + video['views'] +
                   ']\n\tLikes: [' + video['likes'] +
-                  ']\t[Dislikes: ' + video['dislikes'])
+                  ']\t[Dislikes: ' + video['dislikes'] +
+                  ']')
             i += 1
 
 
@@ -65,21 +87,22 @@ while True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs) == 1:
-        catalog = initCatalog()
-        loadData(catalog)
         print("Cargando información de los archivos ....")
-        print('Videos cargados: ' + str(lt.size(catalog['title'])))
-        printResults(catalog['title'])
-        print('La informacion de las categorias es: ')
-        for index in catalog['category_id']['elements']:
-            print('\tID: [' + str(index['id']) +
-                  ']\tCategoria: [' + index['name'] + ']')
+
+        videos = initCatalogVideos()
+        loadDataVideos(videos)
+        print('Videos cargados: ' + str(lt.size(videos['title'])))
+        printVideos(videos['title'])
+
+        categories = initCatalogCategories()
+        loadDataCategories(categories)
+        printCategories(categories)
 
     elif int(inputs) == 2:
         category_name = input("Indique el nombre de la categoria: ")
         country = input("Indique el país a consultar: ")
         size = int(input("Indique el tamaño de la lista de videos: "))
-        result = controller.sortVideos(catalog, category_name, country, size)
+        result = controller.sortVideos(videos, category_name, country, size)
         printResultsReq1(result, size)
 
     else:

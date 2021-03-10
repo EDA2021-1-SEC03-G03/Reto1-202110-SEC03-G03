@@ -48,14 +48,25 @@ def newCatalog():
     return catalog
 
 
+def newCategory():
+    category = {'id': None,
+                'category': None}
+
+    category['id'] = lt.newList("ARRAY_LIST")
+    category['category'] = lt.newList("ARRAY_LIST")
+
+    return category
+
+
 # Funciones para agregar informacion al catalogo
+
 
 def addVideo(catalog, title):
     lt.addLast(catalog['title'], title)
 
 
 def addCategory(catalog, category):
-    lt.addLast(catalog['category_id'], category)
+    lt.addLast(catalog['id'], category)
 # Funciones para creacion de datos
 
 # Funciones de consulta
