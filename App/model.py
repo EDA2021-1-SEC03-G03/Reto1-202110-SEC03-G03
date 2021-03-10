@@ -138,6 +138,7 @@ def loadDays(catalogList):
 
     return catalogDays
 
+
 # Funciones utilizadas para comparar elementos dentro de una lista
 
 
@@ -182,5 +183,24 @@ def sortVideosCountry(catalogList, country):
         iterator += 1
 
     daysList = shs.sort(req2, cmpVideosByDays)
+
+    return daysList
+
+
+def sortVideosCategory(categoryList, catalogList, category_name):
+
+    req3 = lt.newList('ARRAY_LIST')
+
+    iD = traduceCategoryToId(categoryList, category_name)
+
+    iterator = 0
+    while iterator < (lt.size(catalogList)):
+        catalogId = catalogList['elements'][iterator]['category_id']
+
+        if iD in catalogId:
+            lt.addLast(req3, catalogList['elements'][iterator])
+        iterator += 1
+
+    daysList = shs.sort(req3, cmpVideosByDays)
 
     return daysList

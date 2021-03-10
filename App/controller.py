@@ -84,4 +84,8 @@ def sortVideos(categoryList, catalogList, category_name, country, size):
 def sortVideosCountry(catalogList, country):
     return model.sortVideosCountry(catalogList, country)
 
+
+def sortVideosCategory(categoryList, catalogList, category_name):
+    return model.sortVideosCategory(categoryList, catalogList, category_name)
+
 # Funciones de consulta sobre el catálogo
