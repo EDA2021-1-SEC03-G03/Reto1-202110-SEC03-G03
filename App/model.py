@@ -129,7 +129,10 @@ def sortVideos(categoryList, catalogList, category_name, country, size):
 
     iterator = 0
     while iterator < (lt.size(catalogList)):
-        if country in catalogList['elements'][iterator]['country'] and iD in catalogList['elements'][iterator]['category_id']:
+        catalogCountry = catalogList['elements'][iterator]['country']
+        catalogId = catalogList['elements'][iterator]['category_id']
+
+        if country in catalogCountry and iD in catalogId:
             lt.addLast(req1, catalogList['elements'][iterator])
         iterator += 1
     viewsList = shs.sort(req1, cmpVideosByViews)
