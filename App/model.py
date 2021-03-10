@@ -145,6 +145,10 @@ def cmpVideosByViews(video1, video2):
     return (float(video1['views']) > float(video2['views']))
 
 
+def cmpVideosByDays(video1, video2):
+    return (float(video1['days']) > float(video2['days']))
+
+
 # Funciones de ordenamiento
 def sortVideos(categoryList, catalogList, category_name, country, size):
 
@@ -163,3 +167,20 @@ def sortVideos(categoryList, catalogList, category_name, country, size):
     viewsList = shs.sort(req1, cmpVideosByViews)
 
     return viewsList
+
+
+def sortVideosCountry(catalogList, country):
+
+    req2 = lt.newList("ARRAY_LIST")
+
+    iterator = 0
+    while iterator < (lt.size(catalogList)):
+        catalogCountry = catalogList['elements'][iterator]['country']
+
+        if country in catalogCountry:
+            lt.addLast(req2, catalogList['elements'][iterator])
+        iterator += 1
+
+    daysList = shs.sort(req2, cmpVideosByDays)
+
+    return daysList
