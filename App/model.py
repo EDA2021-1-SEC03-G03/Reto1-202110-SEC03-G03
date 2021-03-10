@@ -105,8 +105,7 @@ def traduceCategoryToId(categoryList, category_name):
 
         category = categoryList['elements'][iterator]['category']
 
-        if category == category_name:
-            print('hola')
+        if category_name in category:
             return categoryList['elements'][iterator]['id']
         iterator += 1
 
