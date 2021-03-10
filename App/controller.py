@@ -1,6 +1,7 @@
 ﻿import config as cf
 import model
 import csv
+from DISClib.ADT import list as lt
 
 # Inicialización de los Catálogos
 
@@ -60,6 +61,18 @@ def loadCategory(catalog):
         model.addCategory(categoryList, cl)
 
     return categoryList
+
+
+def loadDays(catalog):
+
+    catalogDays = model.loadDays(catalog)
+
+    i = 0
+    while i < lt.size(catalogDays):
+
+        model.addDays(catalog, catalogDays['elements'][i])
+        i += 1
+
 # Funciones de ordenamiento
 
 

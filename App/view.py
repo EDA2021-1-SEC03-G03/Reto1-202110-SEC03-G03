@@ -10,6 +10,8 @@ def printMenu():
     print("Bienvenido")
     print("1- Cargar información en el catálogo")
     print("2- Conocer los videos con más views que son tendencia en un país")
+    print("3- Conocer el video que más días ha sido trending en un país")
+    print("4- Conocer el video que más días ha sido trending en una categoria")
     print("0- Salir")
 
 
@@ -110,6 +112,16 @@ while True:
         result = controller.sortVideos(categoryList, catalogList,
                                        category_name, country, size)
         printResultsReq1(result['elements'], size)
+
+    elif int(inputs) == 3:
+        country = input("Indique el nombre del país: ")
+
+        controller.loadDays(catalogList)
+
+    elif int(inputs) == 4:
+        category_name = input("Indique el nombre de la categoria: ")
+
+        controller.loadDays(catalogList)
 
     else:
         sys.exit(0)

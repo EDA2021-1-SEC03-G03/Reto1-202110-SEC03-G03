@@ -37,7 +37,8 @@ def newCatalog():
                'views': None,
                'likes': 0,
                'dislikes': 0,
-               'country': None}
+               'country': None,
+               'days': 0}
 
     return catalog
 
@@ -109,9 +110,33 @@ def traduceCategoryToId(categoryList, category_name):
             return categoryList['elements'][iterator]['id']
         iterator += 1
 
+
+def addDays(catalogList, days):
+
+    i = 0
+    while i < lt.size(catalogList):
+
+        if catalogList['elements'][i]['title'] in days:
+            catalogList['elements'][i]['days'] += 1
+        i += 1
+
+
 # Funciones para creacion de datos
 
 # Funciones de consulta
+
+
+def loadDays(catalogList):
+
+    catalogDays = lt.newList("ARRAY_LIST")
+
+    i = 0
+    while i < lt.size(catalogList):
+
+        lt.addLast(catalogDays, catalogList['elements'][i]['title'])
+        i += 1
+
+    return catalogDays
 
 # Funciones utilizadas para comparar elementos dentro de una lista
 
