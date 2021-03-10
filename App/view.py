@@ -85,6 +85,17 @@ def printResultsReq1(video, size):
         i += 1
 
 
+def printResultsReq3(video, category):
+
+    print("El video mas terending para ", str(category), " es: ")
+
+    print('\tTitle: [', video[0]['title'],
+          ']\n\tChannel title: [', video[0]['channel_title'],
+          ']\n\tcountry: [', video[0]['category_id'],
+          ']\n\tNumber of days: [', video[0]['days'],
+          ']')
+
+
 catalog = None
 
 
@@ -122,6 +133,9 @@ while True:
         category_name = input("Indique el nombre de la categoria: ")
 
         controller.loadDays(catalogList)
+        result = controller.sortVideosCategory(categoryList, catalogList,
+                                               category_name)
+        printResultsReq3(result['elements'], category_name)
 
     else:
         sys.exit(0)

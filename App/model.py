@@ -138,11 +138,16 @@ def loadDays(catalogList):
 
     return catalogDays
 
+
 # Funciones utilizadas para comparar elementos dentro de una lista
 
 
 def cmpVideosByViews(video1, video2):
     return (float(video1['views']) > float(video2['views']))
+
+
+def cmpVideosByDays(video1, video2):
+    return (float(video1['days']) > float(video2['days']))
 
 
 # Funciones de ordenamiento
@@ -163,3 +168,21 @@ def sortVideos(categoryList, catalogList, category_name, country, size):
     viewsList = shs.sort(req1, cmpVideosByViews)
 
     return viewsList
+
+
+def sortVideosCategory(categoryList, catalogList, category_name):
+
+    req3 = lt.newList('ARRAY_LIST')
+
+    iD = traduceCategoryToId(categoryList, category_name)
+
+    iterator = 0
+    while iterator < (lt.size(catalogList)):
+        catalogId = catalogList['elements'][iterator]['category_id']
+
+        if iD in catalogId:
+            lt.addLast(req3, catalogList['elements'][iterator])
+        iterator += 1
+        daysList = shs.sort(req3, cmpVideosByDays)
+
+    return daysList
