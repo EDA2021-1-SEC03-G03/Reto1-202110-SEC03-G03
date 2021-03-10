@@ -67,19 +67,18 @@ def printCategories(categories):
               ']\tCategoria: [', pos['category'], ']')
 
 
-def printResultsReq1(ord_videos, size):
+def printResultsReq1(video, size):
 
     print("Los primeros ", str(size), " videos ordenados son: ")
-    i = 1
-    while i <= size:
-        video = lt.getElement(ord_videos, i)
-        print('\t[Trending date: ', video['trending_date'],
-              ']\t[Title: ', video['title'],
-              ']\t[Channel title: ', video['channel_title'],
-              ']\t[Publish time: ', video['publish_time'],
-              ']\t[Views: ', video['views'],
-              ']\n\tLikes: [', video['likes'],
-              ']\t[Dislikes: ', video['dislikes'],
+    i = 0
+    while i < size:
+        print('\t[Trending date: ', video[i]['trending_date'],
+              ']\t[Title: ', video[i]['title'],
+              ']\t[Channel title: ', video[i]['channel_title'],
+              ']\t[Publish time: ', video[i]['publish_time'],
+              ']\t[Views: ', video[i]['views'],
+              ']\n\tLikes: [', video[i]['likes'],
+              ']\t[Dislikes: ', video[i]['dislikes'],
               ']')
         i += 1
 
@@ -110,7 +109,8 @@ while True:
         size = int(input("Indique el tamaño de la lista de videos: "))
         result = controller.sortVideos(categoryList, catalogList,
                                        category_name, country, size)
-        printResultsReq1(result, size)
+        print(result['elements'])
+        printResultsReq1(result['elements'], size)
 
     else:
         sys.exit(0)

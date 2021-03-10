@@ -122,14 +122,16 @@ def cmpVideosByViews(video1, video2):
 
 # Funciones de ordenamiento
 def sortVideos(categoryList, catalogList, category_name, country, size):
-    '''
-    if catalog['country'] == country:
-        # obtener la pos
-        lt.deleteElement(catalog['title'], pos)
 
-    sub_list = lt.subList(catalog['title'], 0, size)
-    '''
-    print(traduceCategoryToId(categoryList, category_name))
-    new_title = shs.sort(catalogList, cmpVideosByViews)
+    req1 = lt.newList("ARRAY_LIST")
 
-    return new_title
+    iD = traduceCategoryToId(categoryList, category_name)
+
+    iterator = 0
+    while iterator < (lt.size(catalogList)):
+        if country in catalogList['elements'][iterator]['country'] and iD in catalogList['elements'][iterator]['category_id']:
+            lt.addLast(req1, catalogList['elements'][iterator])
+        iterator += 1
+    viewsList = shs.sort(req1, cmpVideosByViews)
+
+    return viewsList

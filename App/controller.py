@@ -63,6 +63,7 @@ def loadCategory(catalog):
 
 
 def sortVideos(categoryList, catalogList, category_name, country, size):
-    return model.sortVideos(categoryList, catalogList, category_name, country, size)
+    return model.sortVideos(categoryList, catalogList, category_name,
+                            country, size)
 
 # Funciones de consulta sobre el catálogo
