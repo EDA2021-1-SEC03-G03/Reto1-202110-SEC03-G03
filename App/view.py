@@ -51,12 +51,12 @@ def printVideos(videos):
     print("La información del primer video cargado es: ")
     video = lt.getElement(videos, 1)
     print('\t[Trending date: ', video['trending_date'],
-          ']\t[Title: ', video['title'],
-          ']\t[Channel title: ', video['channel_title'],
-          ']\t[Publish time: ', video['publish_time'],
-          ']\t[Views: ', video['views'],
+          ']\n\t[Title: ', video['title'],
+          ']\n\t[Channel title: ', video['channel_title'],
+          ']\n\t[Publish time: ', video['publish_time'],
+          ']\n\t[Views: ', video['views'],
           ']\n\tLikes: [', video['likes'],
-          ']\t[Dislikes: ', video['dislikes'],
+          ']\n\t[Dislikes: ', video['dislikes'],
           ']')
 
 
@@ -92,6 +92,7 @@ def printResultsReq2(video, country):
     print('\tTitle: [', video[0]['title'],
           ']\n\tChannel title: [', video[0]['channel_title'],
           ']\n\tCountry: [', video[0]['country'],)
+
 
 def printResultsReq3(video, category):
 
