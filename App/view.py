@@ -7,13 +7,15 @@ assert cf
 
 
 def printMenu():
-    print("Bienvenido")
-    print("1- Cargar información en el catálogo")
-    print("2- Conocer los videos con más views que son tendencia en un país")
-    print("3- Conocer el video que más días ha sido trending en un país")
-    print("4- Conocer el video que más días ha sido trending en una categoria")
-    print("5- Conocer los videos con más likes en un país y con un tag determinado")
-    print("0- Salir")
+    print("\nBienvenido")
+    print("\t1. Cargar información en el catálogo")
+    print("\t2. Conocer los videos con más views que son tendencia en un país")
+    print("\t3. Conocer el video que más días ha sido trending en un país")
+    print("\t4. Conocer el video que más días ha sido trending en una",
+          "categoria")
+    print("\t5. Conocer los videos con más likes en un país y con un tag",
+          "determinado")
+    print("\t0. Salir")
 
 
 def initCatalogVideos():
@@ -49,15 +51,15 @@ def loadDataCategories(catalog):
 
 
 def printVideos(videos):
-    print("La información del primer video cargado es: ")
+    print("\nLa información del primer video cargado es: ")
     video = lt.getElement(videos, 1)
-    print('\t[Trending date: ', video['trending_date'],
-          ']\n\t[Title: ', video['title'],
-          ']\n\t[Channel title: ', video['channel_title'],
-          ']\n\t[Publish time: ', video['publish_time'],
-          ']\n\t[Views: ', video['views'],
+    print('\tTrending date: [', video['trending_date'],
+          ']\n\tTitle: [', video['title'],
+          ']\n\tChannel title: [', video['channel_title'],
+          ']\n\tPublish time: [', video['publish_time'],
+          ']\n\tViews: [', video['views'],
           ']\n\tLikes: [', video['likes'],
-          ']\n\t[Dislikes: ', video['dislikes'],
+          ']\n\tDislikes: [', video['dislikes'],
           ']')
 
 
@@ -67,37 +69,40 @@ def printCategories(categories):
     while it.hasNext(iterator):
         pos = it.next(iterator)
         print('\tID: [', pos['id'],
-              ']\tCategoria: [', pos['category'], ']')
+              ']\tCategoria: [', pos['category'],
+              ']')
 
 
 def printResultsReq1(video, size):
 
-    print("Los primeros ", str(size), " videos ordenados son: ")
+    print("\nLos primeros", str(size), "videos ordenados son: ")
     i = 0
     while i < size:
-        print('\t[Trending date: ', video[i]['trending_date'],
-              ']\t[Title: ', video[i]['title'],
-              ']\t[Channel title: ', video[i]['channel_title'],
-              ']\t[Publish time: ', video[i]['publish_time'],
-              ']\t[Views: ', video[i]['views'],
-              ']\tLikes: [', video[i]['likes'],
-              ']\t[Dislikes: ', video[i]['dislikes'],
+        print('\nVideo:', i + 1)
+        print('\n\tTrending date: [', video[i]['trending_date'],
+              ']\n\tTitle: [', video[i]['title'],
+              ']\n\tChannel title: [', video[i]['channel_title'],
+              ']\n\tPublish time: [', video[i]['publish_time'],
+              ']\n\tViews: [', video[i]['views'],
+              ']\n\tikes: [', video[i]['likes'],
+              ']\n\tDislikes: [', video[i]['dislikes'],
               ']')
         i += 1
 
 
 def printResultsReq2(video, country):
 
-    print("El video más trending para", country, "fue: ")
+    print("\nEl video más trending para", country, "fue: ")
 
     print('\tTitle: [', video[0]['title'],
           ']\n\tChannel title: [', video[0]['channel_title'],
-          ']\n\tCountry: [', video[0]['country'],)
+          ']\n\tCountry: [', video[0]['country'],
+          ']')
 
 
 def printResultsReq3(video, category):
 
-    print("El video mas terending para ", str(category), " es: ")
+    print("\nEl video mas trending para ", str(category), " es: ")
 
     print('\tTitle: [', video[0]['title'],
           ']\n\tChannel title: [', video[0]['channel_title'],
@@ -106,18 +111,19 @@ def printResultsReq3(video, category):
           ']')
 
 
-def printResultsReq4(video, size):
+def printResultsReq4(video, size, tag):
 
-    print("Los primeros ", str(size), " videos ordenados son: ")
+    print("Los", str(size), "videos con más likes para el tag", tag, "son: ")
     i = 0
     while i < size:
+        print('\nVideo:', i + 1)
         print('\tTitle: [', video[i]['title'],
-              ']\tChannel title: [', video[i]['channel_title'],
-              ']\tPublish time: [', video[i]['publish_time'],
-              ']\tViews: [', video[i]['views'],
-              ']\tLikes: [', video[i]['likes'],
-              ']\tDislikes: [', video[i]['dislikes'],
-              ']\tTags: [', video[i]['tags'], ']')
+              ']\n\tChannel title: [', video[i]['channel_title'],
+              ']\n\tPublish time: [', video[i]['publish_time'],
+              ']\n\tViews: [', video[i]['views'],
+              ']\n\tLikes: [', video[i]['likes'],
+              ']\n\tDislikes: [', video[i]['dislikes'],
+              ']\n\tTags: [', video[i]['tags'], ']')
         i += 1
 
 
@@ -129,12 +135,12 @@ Menu principal
 """
 while True:
     printMenu()
-    inputs = input('Seleccione una opción para continuar\n')
+    inputs = input('\nSeleccione una opción para continuar:\n')
     if int(inputs) == 1:
-        print("Cargando información de los archivos ....")
+        print("\nCargando información de los archivos ....")
         videos = initCatalogVideos()
         catalogList = loadDataVideos(videos)
-        print('Videos cargados: ' + str(lt.size(catalogList)))
+        print('\tVideos cargados: ' + str(lt.size(catalogList)))
         printVideos(catalogList)
 
         categories = initCatalogCategories()
@@ -172,7 +178,7 @@ while True:
 
         result = controller.sortVideosTags(catalogList, tag_name,
                                            country)
-        printResultsReq4(result['elements'], size)
+        printResultsReq4(result['elements'], size, tag_name)
 
     else:
         sys.exit(0)
