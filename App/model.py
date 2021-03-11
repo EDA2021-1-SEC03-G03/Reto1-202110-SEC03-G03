@@ -111,8 +111,8 @@ def traduceCategoryToId(categoryList, category_name):
 
 
 def addDays(catalogList, days):
-
     i = 0
+    
     while i < lt.size(catalogList):
 
         if catalogList['elements'][i]['title'] in days:
