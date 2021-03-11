@@ -12,6 +12,7 @@ def printMenu():
     print("2- Conocer los videos con más views que son tendencia en un país")
     print("3- Conocer el video que más días ha sido trending en un país")
     print("4- Conocer el video que más días ha sido trending en una categoria")
+    print("5- Conocer los videos con más likes en un país y con un tag determinado")
     print("0- Salir")
 
 
@@ -79,7 +80,7 @@ def printResultsReq1(video, size):
               ']\t[Channel title: ', video[i]['channel_title'],
               ']\t[Publish time: ', video[i]['publish_time'],
               ']\t[Views: ', video[i]['views'],
-              ']\n\tLikes: [', video[i]['likes'],
+              ']\tLikes: [', video[i]['likes'],
               ']\t[Dislikes: ', video[i]['dislikes'],
               ']')
         i += 1
@@ -103,6 +104,21 @@ def printResultsReq3(video, category):
           ']\n\tcountry: [', video[0]['category_id'],
           ']\n\tNumber of days: [', video[0]['days'],
           ']')
+
+
+def printResultsReq4(video, size):
+
+    print("Los primeros ", str(size), " videos ordenados son: ")
+    i = 0
+    while i < size:
+        print('\tTitle: [', video[i]['title'],
+              ']\tChannel title: [', video[i]['channel_title'],
+              ']\tPublish time: [', video[i]['publish_time'],
+              ']\tViews: [', video[i]['views'],
+              ']\tLikes: [', video[i]['likes'],
+              ']\tDislikes: [', video[i]['dislikes'],
+              ']\tTags: [', video[i]['tags'], ']')
+        i += 1
 
 
 catalog = None
@@ -148,6 +164,15 @@ while True:
         result = controller.sortVideosCategory(categoryList, catalogList,
                                                category_name)
         printResultsReq3(result['elements'], category_name)
+
+    elif int(inputs) == 5:
+        country = input("Indique el nombre del país: ")
+        tag_name = input("Indique el nombre del tag: ")
+        size = int(input("Indique el tamaño de la lista de videos: "))
+
+        result = controller.sortVideosTags(catalogList, tag_name,
+                                           country)
+        printResultsReq4(result['elements'], size)
 
     else:
         sys.exit(0)

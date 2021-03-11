@@ -2,7 +2,6 @@
 # import time
 from DISClib.ADT import list as lt
 from DISClib.Algorithms.Sorting import shellsort as shs
-from DISClib.DataStructures import arraylistiterator as it
 assert cf
 
 # Construccion de modelos
@@ -150,6 +149,10 @@ def cmpVideosByDays(video1, video2):
     return (float(video1['days']) > float(video2['days']))
 
 
+def cmpVideosByLikes(video1, video2):
+    return (float(video1['likes']) > float(video2['likes']))
+
+
 # Funciones de ordenamiento
 def sortVideos(categoryList, catalogList, category_name, country, size):
 
@@ -204,3 +207,21 @@ def sortVideosCategory(categoryList, catalogList, category_name):
     daysList = shs.sort(req3, cmpVideosByDays)
 
     return daysList
+
+
+def sortVideosTags(catalogList, tag, country):
+
+    req4 = lt.newList("ARRAY_LIST")
+
+    iterator = 0
+
+    while iterator < (lt.size(catalogList)):
+        catalogCountry = catalogList['elements'][iterator]['country']
+        catalogtag = catalogList['elements'][iterator]['tags']
+
+        if country in catalogCountry and tag in catalogtag:
+            lt.addLast(req4, catalogList['elements'][iterator])
+        iterator += 1
+    tagList = shs.sort(req4, cmpVideosByLikes)
+
+    return tagList
