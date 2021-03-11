@@ -148,7 +148,7 @@ while True:
         printCategories(categoryList)
 
     elif int(inputs) == 2:
-        category_name = input("Indique el nombre de la categoria: ")
+        category_name = (input("Indique el nombre de la categoria: ")).title()
         country = input("Indique el país a consultar: ")
         size = int(input("Indique el tamaño de la lista de videos: "))
         result = controller.sortVideos(categoryList, catalogList,
@@ -164,7 +164,7 @@ while True:
         printResultsReq2(result['elements'], country)
 
     elif int(inputs) == 4:
-        category_name = input("Indique el nombre de la categoria: ")
+        category_name = (input("Indique el nombre de la categoria: ")).title()
 
         controller.loadDays(catalogList)
         result = controller.sortVideosCategory(categoryList, catalogList,

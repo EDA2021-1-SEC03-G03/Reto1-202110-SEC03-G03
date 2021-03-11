@@ -165,7 +165,7 @@ def sortVideos(categoryList, catalogList, category_name, country, size):
         catalogCountry = catalogList['elements'][iterator]['country']
         catalogId = catalogList['elements'][iterator]['category_id']
 
-        if country in catalogCountry and iD in catalogId:
+        if country.lower() in catalogCountry.lower() and iD in catalogId:
             lt.addLast(req1, catalogList['elements'][iterator])
         iterator += 1
     viewsList = shs.sort(req1, cmpVideosByViews)
@@ -181,7 +181,7 @@ def sortVideosCountry(catalogList, country):
     while iterator < (lt.size(catalogList)):
         catalogCountry = catalogList['elements'][iterator]['country']
 
-        if country in catalogCountry:
+        if country.lower() in catalogCountry.lower():
             lt.addLast(req2, catalogList['elements'][iterator])
         iterator += 1
 
@@ -219,8 +219,9 @@ def sortVideosTags(catalogList, tag, country):
         catalogCountry = catalogList['elements'][iterator]['country']
         catalogtag = catalogList['elements'][iterator]['tags']
 
-        if country in catalogCountry and tag in catalogtag:
+        if country.lower() in catalogCountry.lower() and tag in catalogtag:
             lt.addLast(req4, catalogList['elements'][iterator])
+
         iterator += 1
     tagList = shs.sort(req4, cmpVideosByLikes)
 
